@@ -1,22 +1,9 @@
-import { useState } from 'react'
-import './App.css'
+import { LogStreamTerminal } from './features/telemetry/components/LogStreamTerminal';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-    </>
-  )
+    <div className="w-full min-h-screen bg-slate-950 antialiased p-4">
+      <LogStreamTerminal />
+    </div>
+  );
 }
-
-export default App
