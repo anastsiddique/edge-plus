@@ -1,12 +1,14 @@
 import React from 'react';
 import { useLogBuffer } from '../hooks/useLogBuffer';
 import { TerminalPanelWrapper } from '../../../components/TerminalPanelWrapper';
+import { ClusterSummaryHeader } from './ClusterSummaryHeader';
 
 export const LogStreamTerminal: React.FC = () => {
   const logs = useLogBuffer();
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-slate-950 min-h-screen text-slate-100">
+      <ClusterSummaryHeader />
       <TerminalPanelWrapper title="Live Operational Control Mesh">
         <div className="space-y-1.5 font-mono text-xs">
           {logs && logs.length === 0 ? (
@@ -17,11 +19,10 @@ export const LogStreamTerminal: React.FC = () => {
             logs?.map(log => (
               <div key={log.id} className="flex justify-between items-center py-1 border-b border-slate-900/60 hover:bg-slate-900/40 px-2 rounded transition-colors">
                 <div className="flex items-center space-x-3 min-w-0">
-                  <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wide border ${
-                    log.severity === 'CRITICAL' ? 'bg-rose-950/60 text-rose-400 border-rose-900/40 animate-pulse' :
+                  <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wide border ${log.severity === 'CRITICAL' ? 'bg-rose-950/60 text-rose-400 border-rose-900/40 animate-pulse' :
                     log.severity === 'WARNING' ? 'bg-amber-950/60 text-amber-400 border-amber-900/40' :
-                    'bg-slate-900 text-slate-400 border-slate-800'
-                  }`}>
+                      'bg-slate-900 text-slate-400 border-slate-800'
+                    }`}>
                     {log.severity}
                   </span>
                   <span className="text-emerald-400 font-bold shrink-0">{log.serverNodeId}</span>
