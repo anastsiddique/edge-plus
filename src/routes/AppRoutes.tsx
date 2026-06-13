@@ -3,20 +3,21 @@ import { LogStreamTerminal } from '../features/telemetry/components/LogStreamTer
 
 export function AnalyticsPanel() {
     return (
-        <div className="p-6 bg-slate-900 border border-slate-800 rounded-lg font-mono text-center text-slate-400">
+        <div className="max-w-4xl mx-auto p-12 bg-white border border-slate-200 rounded-lg font-mono text-center text-slate-600 shadow-sm font-medium">
             ANALYTICS ENGINE DISPATCHED // Node telemetry visual analytics loading...
         </div>
     );
 }
 
+
 export function AppRoutes() {
     return (
         <BrowserRouter>
             <div className="max-w-4xl mx-auto mb-6 flex space-x-4 font-mono text-xs">
-                <Link to="/" className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-slate-300 hover:border-emerald-500 transition-colors">
+                <Link to="/" className="px-3 py-1.5 bg-white border border-slate-200 rounded text-slate-700 hover:border-slate-400 transition-colors shadow-sm font-bold">
           // LIVE_STREAM
                 </Link>
-                <Link to="/analytics" className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-slate-300 hover:border-blue-500 transition-colors">
+                <Link to="/analytics" className="px-3 py-1.5 bg-white border border-slate-200 rounded text-slate-700 hover:border-slate-400 transition-colors shadow-sm font-bold">
           // ANALYTICS_ENGINE
                 </Link>
             </div>
