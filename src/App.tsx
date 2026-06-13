@@ -1,11 +1,11 @@
 import { Provider } from 'jotai';
-import { LogStreamTerminal } from './features/telemetry/components/LogStreamTerminal';
+import { AppRoutes } from './routes/AppRoutes';
 
 export default function App() {
   return (
     <Provider>
       <div className="w-full min-h-screen bg-slate-950 antialiased p-4">
-        <LogStreamTerminal />
+        <AppRoutes />
       </div>
     </Provider>
   );
