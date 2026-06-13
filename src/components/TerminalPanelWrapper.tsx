@@ -16,7 +16,7 @@ export function TerminalPanelWrapper({ title, children }: PanelProps) {
             <span className="w-3 h-3 rounded-full bg-emerald-500" />
           </div>
           <span className="text-xs font-mono font-bold tracking-wider text-slate-500 uppercase pl-2">
-            EDGE-PLUS // {title}
+            EDGE-PLUS {title}
           </span>
         </div>
       </div>
