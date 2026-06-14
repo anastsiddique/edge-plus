@@ -1,11 +1,19 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { LogStreamTerminal } from '../features/telemetry/components/LogStreamTerminal';
-import { globalLogsAtom, systemHealthSelectorAtom } from '../store/clusterStore';
-import { useAtomValue } from 'jotai';
+import { clusterRegistryAtom, globalLogsAtom, systemHealthSelectorAtom } from '../store/clusterStore';
+import { useAtom, useAtomValue } from 'jotai';
 
 export function AnalyticsPanel() {
     const logs = useAtomValue(globalLogsAtom);
     const systemHealth = useAtomValue(systemHealthSelectorAtom);
+    const [nodes, setNodes] = useAtom(clusterRegistryAtom);
+
+    const toggleNodeStatus = (targetId: string) => {
+        const updatedNodes = nodes.map(node =>
+            node.nodeId === targetId ? { ...node, isOnline: !node.isOnline } : node
+        );
+        setNodes(updatedNodes);
+    };
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white border border-slate-200 rounded-lg font-mono shadow-sm text-slate-800">
@@ -31,6 +39,26 @@ export function AnalyticsPanel() {
 
             <div className="text-[10px] text-slate-400 italic mt-4 border-t border-slate-100 pt-4">
                 Derived metrics are calculated live using background Jotai atomic nodes.
+            </div>
+
+            <div className="mt-6 p-4 bg-white border border-slate-200 rounded-lg">
+                <h3 className="text-xs font-bold text-slate-500 mb-3">INFRASTRUCTURE NODE CONTROLS</h3>
+                <div className="space-y-2">
+                    {nodes.map(node => (
+                        <div key={node.nodeId} className="flex justify-between items-center border-b border-slate-100 pb-2">
+                            <span className="text-slate-900 font-bold">{node.nodeId}</span>
+                            <button
+                                onClick={() => toggleNodeStatus(node.nodeId)}
+                                className={`px-3 py-1 text-[10px] font-bold rounded border transition-colors ${node.isOnline
+                                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+                                    : 'bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100'
+                                    }`}
+                            >
+                                {node.isOnline ? 'ONLINE // ACTIVE' : 'OFFLINE // DISCONNECTED'}
+                            </button>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

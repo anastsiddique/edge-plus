@@ -15,7 +15,7 @@ export function generateTelemetryBatch(): TelemetryPacket[] {
         return {
             id: `packet-${Date.now()}-${index}-${Math.random().toString(36).substring(2, 5)}`,
             timestamp: Date.now(),
-            serverNodeId: `node-edge-${Math.floor(Math.random() * 100) + 1}`,
+            serverNodeId: `node-edge-${Math.floor(Math.random() * 3) + 1}`,
             severity: finalSeverity,
             message: "Edge system operational pulse metric logged",
             metrics: {
